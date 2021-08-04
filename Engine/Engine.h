@@ -10,7 +10,8 @@
 #include "Framework/EventSystem.h"
 
 //graphics
-
+#include "Graphics/Renderer.h"
+#include "Graphics/Texture.h"
 
 //math
 #include "Math/Vector2.h"
