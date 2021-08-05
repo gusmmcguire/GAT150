@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "Actor.h"
 #include "Math/MathUtils.h"
+#include "Graphics/Renderer.h"
 #include <algorithm>
 
 namespace gme {
@@ -39,7 +40,8 @@ namespace gme {
 		}
 	}
 
-	void Scene::Draw(){
+	void Scene::Draw(Renderer* renderer){
+		std::for_each(actors.begin(), actors.end(), [renderer](auto& actor) {actor->Draw(renderer); });
 	}
 
 	void Scene::AddActor(std::unique_ptr<Actor> actor){

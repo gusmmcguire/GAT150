@@ -7,11 +7,12 @@
 namespace gme {
 	class Actor;
 	class Engine;
+	class Renderer;
 
 	class Scene : public Object {
 	public:
 		void Update(float dt);
-		void Draw();
+		void Draw(Renderer* renderer);
 
 		void AddActor(std::unique_ptr<Actor> actor);
 		void RemoveActor(Actor* actor);

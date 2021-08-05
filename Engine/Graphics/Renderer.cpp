@@ -41,8 +41,17 @@ namespace gme {
 		SDL_RenderPresent(renderer);
 	}
 	
-	void Renderer::Draw(std::shared_ptr<Texture> texture, const Vector2& position){
-		SDL_Rect dest{ (int) position.x, (int) position.y, 64, 96 };
-		SDL_RenderCopy(renderer, texture->texture, nullptr, &dest);
+	void Renderer::Draw(std::shared_ptr<Texture> texture, const Vector2& position, float angle, const Vector2& scale){
+		Vector2 size = texture->GetSize() * scale;
+
+		SDL_Rect dest{ static_cast<int>(position.x), static_cast<int>(position.y), static_cast<int>(size.x), static_cast<int>(size.y) };
+		SDL_RenderCopyEx(renderer, texture->texture, nullptr, &dest, angle, nullptr, SDL_FLIP_NONE);
+	}
+	void Renderer::Draw(std::shared_ptr<Texture> texture, const Transform& transform)
+	{
+		Vector2 size = texture->GetSize() * transform.scale;
+
+		SDL_Rect dest{ static_cast<int>(transform.position.x), static_cast<int>(transform.position.y), static_cast<int>(size.x), static_cast<int>(size.y) };
+		SDL_RenderCopyEx(renderer, texture->texture, nullptr, &dest, transform.rotation, nullptr, SDL_FLIP_NONE);
 	}
 }

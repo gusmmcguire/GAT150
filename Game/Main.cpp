@@ -10,15 +10,24 @@ int main(int, char**)
 	engine.Startup();
 	engine.Get<gme::Renderer>()->Create("GAT150", 800, 600);
 
-	std::cout << gme::GetFilePath() << std::endl;
+	gme::Scene scene;
+	scene.engine = &engine;
+
 	gme::SetFilePath("../Resources");
-	std::cout << gme::GetFilePath() << std::endl;
+
 
 	std::shared_ptr<gme::Texture> texture = engine.Get<gme::ResourceSystem>()->Get<gme::Texture>("sf2.png",engine.Get<gme::Renderer>());
 	
+	for(size_t i = 0; i < 10; i++){
+		gme::Transform transform{ gme::Vector2{gme::RandomRange(0,800),gme::RandomRange(0,600)}, gme::RandomRange(0,360), 1.0f };
+		std::unique_ptr<gme::Actor> actor = std::make_unique<gme::Actor>(transform, texture);
+		scene.AddActor(std::move(actor)); 
+	}
+
 
 	bool quit = false;
 	SDL_Event event;
+	float angle = 0;
 
 	while (!quit) {
 		SDL_PollEvent(&event);
@@ -31,18 +40,15 @@ int main(int, char**)
 			break;
 		}
 		
-		engine.Get<gme::Renderer>()->BeginFrame();
-		gme::Vector2 position{ gme::RandomRangeInt(0,800),gme::RandomRangeInt(0,600) };
-		engine.Get<gme::Renderer>()->Draw(texture, position);
-		engine.Get<gme::Renderer>()->EndFrame();
-
-		/*for (size_t i = 0; i < 50; i++) {
-			SDL_Rect src{ 32,64,32,64 };
-			SDL_Rect dest{gme::RandomRangeInt(0,screen.x),gme::RandomRangeInt(0,screen.y), 16, 24};
-			SDL_RenderCopy(renderer, texture, &src, &dest);
-		}*/
-
+		engine.Update(0);
+		scene.Update(0);
 		
+		engine.Get<gme::Renderer>()->BeginFrame();
+
+		scene.Draw(engine.Get<gme::Renderer>());
+
+		engine.Get<gme::Renderer>()->EndFrame();
+	
 	}
 
 
