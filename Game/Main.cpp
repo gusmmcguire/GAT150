@@ -41,8 +41,10 @@ int main(int, char**)
 		}
 		
 		engine.Update(0);
+		quit = (engine.Get<gme::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == gme::InputSystem::eKeyState::Pressed);
 		scene.Update(0);
-		
+
+ 		
 		engine.Get<gme::Renderer>()->BeginFrame();
 
 		scene.Draw(engine.Get<gme::Renderer>());
