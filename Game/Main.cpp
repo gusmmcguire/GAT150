@@ -3,6 +3,7 @@
 #include <SDL_Image.h>
 #include <iostream>
 
+
 int main(int, char**)
 {
 	gme::Engine engine;
@@ -27,7 +28,7 @@ int main(int, char**)
 
 	bool quit = false;
 	SDL_Event event;
-	float angle = 0;
+	float quitTime = engine.time.time + 3.0f;
 
 	while (!quit) {
 		SDL_PollEvent(&event);
@@ -36,13 +37,12 @@ int main(int, char**)
 		case SDL_QUIT:
 			quit = true;
 			break;
-		default:
-			break;
 		}
 		
-		engine.Update(0);
-		quit = (engine.Get<gme::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == gme::InputSystem::eKeyState::Pressed);
-		scene.Update(0);
+		
+		engine.Update();
+		scene.Update(engine.time.deltaTime);
+		if(!quit) quit = (engine.Get<gme::InputSystem>()->GetKeyState(SDL_SCANCODE_ESCAPE) == gme::InputSystem::eKeyState::Pressed);
 
  		
 		engine.Get<gme::Renderer>()->BeginFrame();

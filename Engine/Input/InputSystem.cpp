@@ -1,5 +1,4 @@
 #include "InputSystem.h"
-#include <algorithm>
 
 namespace gme {
 	void InputSystem::Startup(){

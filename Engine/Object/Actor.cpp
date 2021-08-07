@@ -5,8 +5,11 @@
 
 namespace gme {
 	void Actor::Update(float dt){
-		transform.rotation += .2;
+		transform.rotation += 180 * dt;
 		transform.rotation = gme::Wrap(transform.rotation, 0.0f, 360.0f);
+
+		transform.position.x += 800.0f * dt;
+		transform.position.x = gme::Wrap(transform.position.x, 0.0f, 800.0f);
 
 		transform.Update();
 		std::for_each(children.begin(), children.end(), [](auto& child) {child->transform.Update(child->parent->transform.matrix); });
@@ -22,6 +25,6 @@ namespace gme {
 	}
 
 	float Actor::GetRadius(){
-		return std::max(texture->GetSize().x, texture->GetSize().y) * 0.5f;
+		return (texture) ? texture->GetSize().Length() * .05f : 0;
 	}
 }
