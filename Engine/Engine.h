@@ -6,6 +6,7 @@
 #include "Input/InputSystem.h"
 
 //core
+#include "Core/Utilities.h"
 #include "Core/FileSystem.h"
 #include "Core/Timer.h"
 

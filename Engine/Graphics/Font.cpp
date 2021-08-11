@@ -1,10 +1,12 @@
 #include "Font.h"
+#include <cassert>
 
 namespace gme {
 	Font::~Font(){
 		if (font != nullptr) TTF_CloseFont(font);
 	}
 	bool Font::Load(const std::string& name, void* data){
+		assert(data);
 		font = TTF_OpenFont(name.c_str(), (*static_cast<int*>(data)));//possible change
 		if (font == nullptr) { 
 			std::cout << "TTF_OpenFont Error: " << TTF_GetError() << std::endl; return false; 

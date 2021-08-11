@@ -1,5 +1,6 @@
 #include "AudioSystem.h"
 #include "AudioChannel.h"
+#include "Core/Utilities.h"
 
 namespace gme
 {
@@ -30,17 +31,17 @@ namespace gme
 
 	void AudioSystem::AddAudio(const std::string& name, const std::string& filename)
 	{
-		if (sounds.find(name) == sounds.end())
+		if (sounds.find(string_tolower(name)) == sounds.end())
 		{
 			FMOD::Sound* sound{ nullptr };
 			fmodSystem->createSound(filename.c_str(), FMOD_DEFAULT, 0, &sound);
-			sounds[name] = sound;
+			sounds[string_tolower(name)] = sound;
 		}
 	}
 
 	AudioChannel AudioSystem::PlayAudio(const std::string& name, float volume, float pitch, bool loop)
 	{
-		auto iter = sounds.find(name);
+		auto iter = sounds.find(string_tolower(name));
 		if (iter != sounds.end())
 		{
 			FMOD::Sound* sound = iter->second;

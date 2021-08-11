@@ -27,21 +27,21 @@ namespace gme
 	template<typename T>
 	inline std::shared_ptr<T> ResourceSystem::Get(const std::string& name, void* data)
 	{
-		if (resources.find(name) != resources.end())
+		if (resources.find(string_tolower(name)) != resources.end())
 		{
-			return std::dynamic_pointer_cast<T>(resources[name]);
+			return std::dynamic_pointer_cast<T>(resources[string_tolower(name)]);
 		}
 		else
 		{
 			std::shared_ptr resource = std::make_shared<T>(); // new Shape
-			resource->Load(name, data);
-			resources[name] = resource;
+			resource->Load(string_tolower(name), data);
+			resources[string_tolower(name)] = resource;
 
 			return resource;
 		}
 	}
 
 	inline void ResourceSystem::Add(const std::string& name, std::shared_ptr<Resource> resource) {
-		resources[name] = resource;
+		resources[string_tolower(name)] = resource;
 	}
 }

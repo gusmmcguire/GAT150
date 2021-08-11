@@ -2,10 +2,9 @@
 #include <SDL.h>
 #include <SDL_Image.h>
 #include <iostream>
+#include <cassert>
 
-
-int main(int, char**)
-{
+int main(int, char**){
 	gme::Engine engine;
 
 	engine.Startup();

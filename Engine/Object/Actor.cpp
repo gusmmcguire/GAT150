@@ -11,6 +11,8 @@ namespace gme {
 
 		transform.position.x += 200.0f * dt;
 		transform.position.x = Wrap(transform.position.x, 0.0f, 800.0f);
+		transform.position.y += 40 * dt;
+		transform.position.y = Wrap(transform.position.y, 0.0f, 600.0f);
 
 
 		transform.Update();
