@@ -16,6 +16,9 @@ int main(int, char**)
 
 	gme::SetFilePath("../Resources");
 
+	engine.Get<gme::AudioSystem>()->AddAudio("explosion", "Audio/explosion.wav");
+	engine.Get<gme::AudioSystem>()->AddAudio("backingMusic", "Audio/backing.wav");
+	gme::AudioChannel channel = engine.Get<gme::AudioSystem>()->PlayAudio("backingMusic", 1, 1, true);
 
 	std::shared_ptr<gme::Texture> movingTexture = engine.Get<gme::ResourceSystem>()->Get<gme::Texture>("shuriken.png",engine.Get<gme::Renderer>());
 	
@@ -24,6 +27,15 @@ int main(int, char**)
 		std::unique_ptr<gme::Actor> actor = std::make_unique<gme::Actor>(transform, movingTexture);
 		scene.AddActor(std::move(actor)); 
 	}
+
+
+	int size = 16;
+	std::shared_ptr<gme::Font> font = engine.Get<gme::ResourceSystem>()->Get<gme::Font>("Fonts/KarmaFuture.ttf", &size);
+
+	std::shared_ptr<gme::Texture> textTexture = std::make_shared<gme::Texture>(engine.Get<gme::Renderer>());
+	textTexture->Create(font->CreateSurface("hello world", gme::Color{ 1,1,1 }));
+	engine.Get<gme::ResourceSystem>()->Add("textTexture", textTexture);
+
 
 
 	bool quit = false;
@@ -47,9 +59,18 @@ int main(int, char**)
 
 		if (engine.Get<gme::InputSystem>()->GetButtonState((int)gme::InputSystem::eMouseButton::Left) == gme::InputSystem::eKeyState::Pressed) {
 			engine.Get<gme::ParticleSystem>()->Create(engine.Get<gme::InputSystem>()->GetMousePosition(), 50, .5, particleTexture, 300);
+			engine.Get<gme::AudioSystem>()->PlayAudio("explosion", 1, gme::RandomRange(0.2,2));
+			channel.SetPitch(gme::RandomRange(-2, 2));
 		}
- 		
+
+	
+
 		engine.Get<gme::Renderer>()->BeginFrame();
+
+		gme::Transform t;
+		t.position = { 30,30 };
+		engine.Get<gme::Renderer>()->Draw(textTexture, t);
+
 
 		scene.Draw(engine.Get<gme::Renderer>());
 		engine.Draw(engine.Get<gme::Renderer>());

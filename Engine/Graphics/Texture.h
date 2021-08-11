@@ -1,14 +1,23 @@
 #pragma once
 #include "Resource/Resource.h"
 #include "Math/Vector2.h"
+#include "Math/Color.h"
 #include <SDL.h>
 
 namespace gme {
+	class Renderer;
 	class Texture : public Resource {
 	public:
+		Texture() {}
+		Texture(Renderer* renderer);
+
 		bool Load(const std::string& name, void* data) override;
 
 		Vector2 GetSize() const;
+
+		bool Create(SDL_Surface* surface);
+		
+
 
 		friend class Renderer;
 

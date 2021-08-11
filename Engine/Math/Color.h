@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <SDL.h>
 
 namespace gme {
 	struct Color {
@@ -20,6 +21,15 @@ namespace gme {
 
 		operator std::uint32_t() const { return ToRGB(); }
 		
+		operator SDL_Color() const{
+			SDL_Color color;
+			color.r = static_cast<Uint8>(r * 255);
+			color.g = static_cast<Uint8>(g * 255);
+			color.b = static_cast<Uint8>(b * 255);
+			color.a = 255;
+			return color;
+		}
+
 		std::uint32_t ToRGB() const {
 			std::uint8_t red = static_cast<std::uint8_t>(r * 255);
 			std::uint8_t green = static_cast<std::uint8_t>(g * 255);

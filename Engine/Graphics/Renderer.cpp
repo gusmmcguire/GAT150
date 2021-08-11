@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 #include <iostream>
 
 namespace gme {
@@ -10,10 +11,12 @@ namespace gme {
 		}
 
 		IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
+		TTF_Init();
 	}
 
 	void Renderer::Shutdown(){
 		IMG_Quit();
+		TTF_Quit();
 		SDL_DestroyRenderer(renderer);
 		SDL_DestroyWindow(window);
 	}

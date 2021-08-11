@@ -4,6 +4,9 @@
 #include <iostream>
 
 namespace gme {
+	Texture::Texture(Renderer* renderer){
+		this->renderer = renderer->renderer;
+	}
 
 	bool Texture::Load(const std::string& name, void* data){
 
@@ -27,11 +30,20 @@ namespace gme {
 	}
 
 
-	Vector2 Texture::GetSize() const
-	{
+	Vector2 Texture::GetSize() const{
+
 		SDL_Point point;
 		SDL_QueryTexture(texture, nullptr, nullptr, &point.x, &point.y);
 
 		return Vector2{ point.x,point.y };
+	}
+	bool Texture::Create(SDL_Surface* surface){
+ 		texture = SDL_CreateTextureFromSurface(renderer, surface);
+		SDL_FreeSurface(surface);
+		if (texture == nullptr) {
+			std::cout << "SDL_CreateTextureFromSurface Error: " << SDL_GetError() << std::endl;
+			return false;
+		}
+		return true;
 	}
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "Resource.h"
+#include "Graphics/Texture.h"
 #include "Framework/System.h"
 #include <string>
 #include <map>
@@ -17,6 +18,7 @@ namespace gme
 
 		template <typename T>
 		std::shared_ptr<T> Get(const std::string& name, void* data = nullptr);
+		void Add(const std::string& name, std::shared_ptr<Resource> resource);
 
 	private:
 		std::map<std::string, std::shared_ptr<Resource>> resources;
@@ -37,5 +39,9 @@ namespace gme
 
 			return resource;
 		}
+	}
+
+	inline void ResourceSystem::Add(const std::string& name, std::shared_ptr<Resource> resource) {
+		resources[name] = resource;
 	}
 }
