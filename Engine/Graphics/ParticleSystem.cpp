@@ -27,12 +27,12 @@ namespace gme {
 	void ParticleSystem::Draw(Renderer* renderer){
 		for (const Particle& particle : particles) {
 			if (particle.isActive) {
-				renderer->Draw(particle.texture, particle.position);
+				renderer->Draw(particle.texture, particle.position, particle.scale);
 			}
 		}
 	}
 
-	void ParticleSystem::Create(const Vector2& position, size_t count, float lifetime, std::shared_ptr<Texture> texture, float speed){
+	void ParticleSystem::Create(const Vector2& position, size_t count, float lifetime, std::shared_ptr<Texture> texture, float speed, const Vector2& scale){
 		for (size_t i = 0; i < count; i++) {
 			auto particle = std::find_if(particles.begin(), particles.end(), Particle::IsNotActive);
 			if (particle != particles.end()) {
@@ -41,13 +41,14 @@ namespace gme {
 				particle->position = position;
 				particle->prevPosition = position;
 				particle->texture = texture;
-				
+				particle->scale = scale;
+
 				particle->velocity = Vector2{ RandomRange(-1,1),RandomRange(-1,1)} * (speed * Random());
 			}
 		}
 	}
 	
-	void ParticleSystem::Create(const Vector2& position, size_t count, float lifetime, const std::vector<Color>& colors, float speed, float angle, float angleRange){
+	void ParticleSystem::Create(const Vector2& position, size_t count, float lifetime, std::shared_ptr<Texture> texture, float speed, float angle, float angleRange, const Vector2& scale){
 		for (size_t i = 0; i < count; i++) {
 			auto particle = std::find_if(particles.begin(), particles.end(), Particle::IsNotActive);
 			if (particle != particles.end()) {
@@ -55,6 +56,8 @@ namespace gme {
 				particle->lifetime = lifetime;
 				particle->position = position;
 				particle->prevPosition = position;
+				particle->texture = texture;
+				particle->scale = scale;
 
 				particle->velocity = Vector2::Rotate(Vector2::right, angle + RandomRange(-angleRange,angleRange)) * (speed * Random());
 			}

@@ -33,7 +33,7 @@ namespace gme {
 		std::shared_ptr<Texture> texture;
 
 		Transform transform;
-		Scene* scene{ nullptr };
+		gme::Scene* scene{ nullptr };
 
 		Actor* parent{ nullptr };
 		std::vector<std::unique_ptr<Actor>> children;

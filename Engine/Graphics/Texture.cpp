@@ -6,12 +6,12 @@
 
 namespace gme {
 	Texture::Texture(Renderer* renderer){
-		assert(renderer);
 		this->renderer = renderer->renderer;
 	}
 
 	bool Texture::Load(const std::string& name, void* data){
 
+		assert(data);
 		renderer = static_cast<Renderer*>(data)->renderer;
 
 		//load surface
@@ -40,7 +40,6 @@ namespace gme {
 		return Vector2{ point.x,point.y };
 	}
 	bool Texture::Create(SDL_Surface* surface){
-		assert(surface);
  		texture = SDL_CreateTextureFromSurface(renderer, surface);
 		SDL_FreeSurface(surface);
 		if (texture == nullptr) {

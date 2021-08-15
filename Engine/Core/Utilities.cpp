@@ -1,4 +1,5 @@
 #include "Utilities.h"
+#include "Engine.h"
 #include <algorithm>
 
 namespace gme {
@@ -12,5 +13,13 @@ namespace gme {
 		return std::equal(str1.begin(), str1.end(), str2.begin(), [](char c1, char c2) {
 			return (std::tolower(c1) == std::tolower(c2));
 		});
+	}
+	
+	bool IsButtonPressed(int buttonID, Engine* engine){
+		return engine->Get<gme::InputSystem>()->GetKeyState(buttonID) == gme::InputSystem::eKeyState::Pressed;
+	}
+
+	bool IsButtonHeld(int buttonID, Engine* engine) {
+		return engine->Get<gme::InputSystem>()->GetKeyState(buttonID) == gme::InputSystem::eKeyState::Held || engine->Get<gme::InputSystem>()->GetKeyState(buttonID) == gme::InputSystem::eKeyState::Pressed;
 	}
 }
