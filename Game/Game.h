@@ -14,7 +14,8 @@ public:
 		Game1,
 		StartLevel2,
 		Game2,
-		GameOver
+		GameOver,
+		GameWin
 	};
 
 public:
@@ -28,6 +29,7 @@ public:
 
 private:
 	void OnPlayerDead(const gme::Event& event);
+	void OnAddPoints(const gme::Event& event);
 
 	void MakeRoomOne();
 	void MakeRoomTwo();

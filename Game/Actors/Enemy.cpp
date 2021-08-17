@@ -42,6 +42,11 @@ void Enemy::OnCollision(Actor* actor) {
 		scene->engine->Get<gme::ParticleSystem>()->Create(transform.position, 200, 1, scene->engine->Get<gme::ResourceSystem>()->Get<gme::Texture>("particle01.png", scene->engine->Get<gme::Renderer>()), 50);
 		destroy = true;
 		actor->destroy = true;
+
+		gme::Event event;
+		event.name = "AddPoints";
+		event.data = 100;
+		scene->engine->Get<gme::EventSystem>()->Notify(event);
 	}
 }
 

@@ -19,7 +19,7 @@ void Game::Initialize() {
 	engine->Get<gme::AudioSystem>()->AddAudio("explosion", "Audio/explosion.wav");
 	engine->Get<gme::AudioSystem>()->AddAudio("backingMusic", "Audio/backing.wav");
 	//start backing music
-	//musicChannel = engine->Get<gme::AudioSystem>()->PlayAudio("backingMusic", .2, 1, true);
+	musicChannel = engine->Get<gme::AudioSystem>()->PlayAudio("backingMusic", .2, 1, true);
 
 	
 	//make font
@@ -30,8 +30,9 @@ void Game::Initialize() {
 	textTexture->Create(font->CreateSurface("Game Title", gme::Color{ 1,1,1 }));
 	engine->Get<gme::ResourceSystem>()->Add("textTexture", textTexture);
 
-	//add player dead event  Maybe delete, do I even use???
+	//subscribe to events
 	engine->Get<gme::EventSystem>()->Subscribe("PlayerDead", std::bind(&Game::OnPlayerDead,this,std::placeholders::_1));
+	engine->Get<gme::EventSystem>()->Subscribe("AddPoints", std::bind(&Game::OnAddPoints,this,std::placeholders::_1));
 }
 
 void Game::Shutdown(){
@@ -53,6 +54,8 @@ void Game::Update(){
 		}
 		break;
 	case Game::eState::StartGame:
+		score = 0;
+		lives = 3;
 		state = eState::StartLevel1;
 		break;
 	case Game::eState::StartLevel1:
@@ -114,6 +117,12 @@ void Game::Update(){
 			state = eState::StartGame;
 		}
 		break;
+	case Game::eState::GameWin:
+		scene->RemoveAllActors();
+		if (gme::IsButtonPressed(SDL_SCANCODE_SPACE, scene->engine)) {
+			state = eState::StartGame;
+		}
+		break;
 	default:
 		break;
 	}
@@ -130,6 +139,8 @@ void Game::Update(){
 
 void Game::Draw(){
 	engine->Get<gme::Renderer>()->BeginFrame();
+	engine->Draw(engine->Get<gme::Renderer>());
+	scene->Draw(engine->Get<gme::Renderer>());
 	switch (state)
 	{
 	case Game::eState::Title:
@@ -137,10 +148,27 @@ void Game::Draw(){
 		engine->Get<gme::Renderer>()->Draw(textTexture, gme::Transform{ {400, 290 + static_cast<int>(std::sin(stateTimer * 4) * 10)}});
 		textTexture->Create(font->CreateSurface("Press Space To Start Game", gme::Color{ 1,1,1 }));
 		engine->Get<gme::Renderer>()->Draw(textTexture, gme::Transform{ {400, 305 + static_cast<int>(std::sin(stateTimer * 4) * 10)}});
-		
+		break;
+	case Game::eState::Game1:
+		textTexture->Create(font->CreateSurface("Score: " + std::to_string(score), gme::Color{ 1,1,1 }));
+		engine->Get<gme::Renderer>()->Draw(textTexture, gme::Transform{ {100, 17 + static_cast<int>(std::sin(stateTimer * 4) * 5)} });
+		textTexture->Create(font->CreateSurface("Lives: " + std::to_string(lives), gme::Color{ 1,1,1 }));
+		engine->Get<gme::Renderer>()->Draw(textTexture, gme::Transform{ {700, 17 + static_cast<int>(std::sin(stateTimer * 4) * 5)} });
+		break;
+	case Game::eState::Game2:
+		textTexture->Create(font->CreateSurface("Score: " + std::to_string(score), gme::Color{ 1,1,1 }));
+		engine->Get<gme::Renderer>()->Draw(textTexture, gme::Transform{ {100, 17 + static_cast<int>(std::sin(stateTimer * 4) * 5)} });
+		textTexture->Create(font->CreateSurface("Lives: " + std::to_string(lives), gme::Color{ 1,1,1 }));
+		engine->Get<gme::Renderer>()->Draw(textTexture, gme::Transform{ {700, 17 + static_cast<int>(std::sin(stateTimer * 4) * 5)} });
 		break;
 	case Game::eState::GameOver:
 		textTexture->Create(font->CreateSurface("Game Over", gme::Color{ 1,0,0 }));
+		engine->Get<gme::Renderer>()->Draw(textTexture, gme::Transform{ {400, 290 + static_cast<int>(std::sin(stateTimer * 4) * 10)} });
+		textTexture->Create(font->CreateSurface("Press Space To Restart Game", gme::Color{ 1,1,1 }));
+		engine->Get<gme::Renderer>()->Draw(textTexture, gme::Transform{ {400, 305 + static_cast<int>(std::sin(stateTimer * 4) * 10)} });
+		break;
+	case Game::eState::GameWin:
+		textTexture->Create(font->CreateSurface("You Win", gme::Color{ 1,0,0 }));
 		engine->Get<gme::Renderer>()->Draw(textTexture, gme::Transform{ {400, 290 + static_cast<int>(std::sin(stateTimer * 4) * 10)} });
 		textTexture->Create(font->CreateSurface("Press Space To Restart Game", gme::Color{ 1,1,1 }));
 		engine->Get<gme::Renderer>()->Draw(textTexture, gme::Transform{ {400, 305 + static_cast<int>(std::sin(stateTimer * 4) * 10)} });
@@ -149,15 +177,24 @@ void Game::Draw(){
 		break;
 	}
 
-	engine->Draw(engine->Get<gme::Renderer>());
-	scene->Draw(engine->Get<gme::Renderer>());
+	
 
 	engine->Get<gme::Renderer>()->EndFrame();
 }
 
 void Game::OnPlayerDead(const gme::Event& event) {
 	//std::cout << std::get<std::string>(event.data) << std::endl;
-	state = eState::GameOver;
+	if (lives <= 0) state = eState::GameOver;
+	else {
+		lives--;
+		if (state == eState::Game1) state = eState::StartLevel1;
+		else state = eState::StartLevel2;
+	}
+}
+
+void Game::OnAddPoints(const gme::Event& event) {
+	score += std::get<int>(event.data);
+	if (score >= 400) state = eState::GameWin;
 }
 
 void Game::MakeRoomOne() {
