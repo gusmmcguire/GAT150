@@ -127,7 +127,7 @@ void Game::Update(){
 		break;
 	}
 
-	if (!quit) quit = gme::IsButtonPressed(SDL_SCANCODE_ESCAPE, engine.get());
+	//if (!quit) quit = gme::IsButtonPressed(SDL_SCANCODE_ESCAPE, engine.get());
 	
 	/*if (engine->Get<gme::InputSystem>()->GetButtonState((int)gme::InputSystem::eMouseButton::Left) == gme::InputSystem::eKeyState::Pressed) {
 		engine->Get<gme::ParticleSystem>()->Create(engine->Get<gme::InputSystem>()->GetMousePosition(), 50, .5, engine->Get<gme::ResourceSystem>()->Get<gme::Texture>("particle01.png", engine->Get<gme::Renderer>()), 300);
