@@ -19,6 +19,7 @@ namespace gme {
 
 		void Draw(std::shared_ptr<Texture> texture, const Vector2& position, const Vector2& scale = Vector2::one, float angle = 0);
 		void Draw(std::shared_ptr<Texture> texture, const Transform& transform);
+		void Draw(std::shared_ptr<Texture> texture, const SDL_Rect& source, const Transform& transform);
 
 		friend class Texture;
 

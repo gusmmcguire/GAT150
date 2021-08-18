@@ -58,6 +58,7 @@ namespace gme {
 		
 		SDL_RenderCopyEx(renderer, texture->texture, nullptr, &dest, gme::RadToDeg(angle), nullptr, SDL_FLIP_NONE);
 	}
+	
 	void Renderer::Draw(std::shared_ptr<Texture> texture, const Transform& transform)
 	{
 		Vector2 size = texture->GetSize() * transform.scale;
@@ -70,5 +71,19 @@ namespace gme {
 		dest.h = static_cast<int>(size.y); 
 		
 		SDL_RenderCopyEx(renderer, texture->texture, nullptr, &dest, gme::RadToDeg(transform.rotation), nullptr, SDL_FLIP_NONE);
+	}
+	
+	void Renderer::Draw(std::shared_ptr<Texture> texture, const SDL_Rect& source, const Transform& transform){
+		Vector2 size = Vector2{ source.w, source.h };
+		size *= transform.scale;
+		Vector2 newPosition = transform.position - (size * 0.5f);
+
+		SDL_Rect dest;
+		dest.x = static_cast<int>(newPosition.x);
+		dest.y = static_cast<int>(newPosition.y);
+		dest.w = static_cast<int>(size.x);
+		dest.h = static_cast<int>(size.y);
+
+		SDL_RenderCopyEx(renderer, texture->texture, &source, &dest, gme::RadToDeg(transform.rotation), nullptr, SDL_FLIP_NONE);
 	}
 }
