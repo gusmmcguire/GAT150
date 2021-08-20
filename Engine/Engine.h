@@ -1,17 +1,22 @@
 #pragma once
 
-//systems
-#include "Audio/AudioSystem.h"
-#include "Audio/AudioChannel.h"
-#include "Input/InputSystem.h"
+#define REGISTER_CLASS(CLASS) ObjectFactory::Instance().Register<CLASS>(#CLASS);
 
 //core
 #include "Core/Utilities.h"
 #include "Core/FileSystem.h"
 #include "Core/Timer.h"
 
+//math
+#include "Math/Vector2.h"
+#include "Math/Color.h"
+#include "Math/Random.h"
+#include "Math/MathUtils.h"
+
 //framework
 #include "Framework/EventSystem.h"
+#include "Framework/Singleton.h"
+#include "Framework/Factory.h"
 
 //graphics
 #include "Graphics/Renderer.h"
@@ -19,11 +24,10 @@
 #include "Graphics/ParticleSystem.h"
 #include "Graphics/Font.h"
 
-//math
-#include "Math/Vector2.h"
-#include "Math/Color.h"
-#include "Math/Random.h"
-#include "Math/MathUtils.h"
+//systems
+#include "Audio/AudioSystem.h"
+#include "Audio/AudioChannel.h"
+#include "Input/InputSystem.h"
 
 //resource
 #include "Resource/ResourceSystem.h"
@@ -42,6 +46,9 @@
 #include <algorithm>
 
 namespace gme {
+	using ObjectFactory = Singleton<Factory<std::string, Object>>;
+
+
 	class Engine {
 	public:
 		void Startup();
