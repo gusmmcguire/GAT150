@@ -45,6 +45,7 @@ namespace gme {
 		bool operator == (const Vector2& v) const { return (x == v.x && y == v.y); }
 		bool operator != (const Vector2& v) const { return (x != v.x || y != v.y); }
 
+
 		float Length() const;
 		float LengthSqr() const;
 
@@ -57,6 +58,7 @@ namespace gme {
 		static Vector2 Rotate(const Vector2& v, float radians);
 
 		friend std::istream& operator >> (std::istream& stream, Vector2& v);
+		friend std::ostream& operator << (std::ostream& stream, Vector2& v);
 
 		static const Vector2 left;
 		static const Vector2 right;

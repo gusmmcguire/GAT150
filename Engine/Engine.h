@@ -6,6 +6,7 @@
 #include "Core/Utilities.h"
 #include "Core/FileSystem.h"
 #include "Core/Timer.h"
+#include "Core/Json.h"
 
 //math
 #include "Math/Vector2.h"

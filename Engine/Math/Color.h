@@ -19,6 +19,9 @@ namespace gme {
 
 		Color operator * (const float s) const { return { s * r, s * g, s * b }; }
 
+		float operator [] (size_t index) const { return (&r)[index]; }
+		float& operator [] (size_t index) { return (&r)[index]; }
+
 		operator std::uint32_t() const { return ToRGB(); }
 		
 		operator SDL_Color() const{
@@ -39,6 +42,7 @@ namespace gme {
 		}
 
 		friend std::istream& operator >> (std::istream& stream, Color& c);
+		friend std::ostream& operator << (std::ostream& stream, Color& c);
 
 		static const Color white;
 		static const Color red ;
