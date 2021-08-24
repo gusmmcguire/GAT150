@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "Component/Component.h"
 #include "Math/Transform.h"
+#include "Core/Serializable.h"
 #include <vector>
 #include <memory>
 
@@ -9,7 +10,7 @@ namespace gme {
 	class Scene;
 	class Renderer;
 
-	class Actor : public Object {
+	class Actor : public Object, public ISerializable {
 	public:
 		Actor() {}
 		Actor(const Transform& transform) : transform{ transform } {}
@@ -29,6 +30,9 @@ namespace gme {
 		void AddComponent(std::unique_ptr<Component> component);
 		template<class T>
 		T* AddComponent();
+
+		virtual bool Write(const rapidjson::Value& value) const override;
+		virtual bool Read(const rapidjson::Value& value) override;
 
 	public:
 		bool destroy{ false };

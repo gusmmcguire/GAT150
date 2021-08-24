@@ -4,6 +4,8 @@
 #include "document.h"
 #include <string>
 
+#define JSON_READ(value, data) gme::json::Get(value, #data, data);
+
 namespace gme {
 	namespace json {
 		bool Load(const std::string& filename, rapidjson::Document& document);

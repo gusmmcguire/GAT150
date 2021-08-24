@@ -13,21 +13,26 @@ void Game::Initialize() {
 	//change file path
 	gme::SetFilePath("../Resources");
 
-	std::unique_ptr<gme::Actor> actor = std::make_unique<gme::Actor>(gme::Transform{ gme::Vector2{400,300}, 0, 2 });
-	{
-		auto component = gme::ObjectFactory::Instance().Create<gme::SpriteAnimationComponent>("SpriteAnimationComponent");
-		//gme::SpriteAnimationComponent* component = actor->AddComponent<gme::SpriteAnimationComponent>();
-		component->texture = engine->Get<gme::ResourceSystem>()->Get<gme::Texture>("character.png", engine->Get<gme::Renderer>());
-		component->fps = 24;
-		component->numFramesX = 12;
-		component->numFramesY = 8;
-		actor->AddComponent(std::move(component));
-	}
-	{
-		gme::PhysicsComponent* component = actor->AddComponent<gme::PhysicsComponent>();
-		//component->ApplyForce(gme::Vector2::right * 100);
-	}
-	scene->AddActor(std::move(actor));
+	rapidjson::Document document;
+ 	bool success = gme::json::Load("scene.txt", document);
+	assert(success);
+	scene->Read(document);
+
+	//std::unique_ptr<gme::Actor> actor = std::make_unique<gme::Actor>(gme::Transform{ gme::Vector2{400,300}, 0, 2 });
+	//{
+	//	auto component = gme::ObjectFactory::Instance().Create<gme::SpriteAnimationComponent>("SpriteAnimationComponent");
+	//	//gme::SpriteAnimationComponent* component = actor->AddComponent<gme::SpriteAnimationComponent>();
+	//	component->texture = engine->Get<gme::ResourceSystem>()->Get<gme::Texture>("character.png", engine->Get<gme::Renderer>());
+	//	component->fps = 24;
+	//	component->numFramesX = 12;
+	//	component->numFramesY = 8;
+	//	actor->AddComponent(std::move(component));
+	//}
+	//{
+	//	gme::PhysicsComponent* component = actor->AddComponent<gme::PhysicsComponent>();
+	//	//component->ApplyForce(gme::Vector2::right * 100);
+	//}
+	//scene->AddActor(std::move(actor));
 	
 }
 
