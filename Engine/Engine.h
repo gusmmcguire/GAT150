@@ -1,6 +1,6 @@
 #pragma once
 
-#define REGISTER_CLASS(class) ObjectFactory::Instance().Register<class>(#class);
+#define REGISTER_CLASS(class) gme::ObjectFactory::Instance().Register<class>(#class);
 
 //core
 #include "Core/Utilities.h"
@@ -26,6 +26,9 @@
 #include "Graphics/ParticleSystem.h"
 #include "Graphics/Font.h"
 
+//physics system
+#include "Physics/PhysicsSystem.h"
+
 //systems
 #include "Audio/AudioSystem.h"
 #include "Audio/AudioChannel.h"
@@ -42,6 +45,7 @@
 #include "Component/SpriteComponent.h"
 #include "Component/SpriteAnimationComponent.h"
 #include "Component/PhysicsComponent.h"
+#include "Component/RBPhysicsComponent.h"
 
 #include <vector>
 #include <memory>

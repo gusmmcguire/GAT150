@@ -8,10 +8,17 @@
                400,
                300
             ],
-            "rotation": 0,
-            "scale": [2,2]
+            "rotation":0,
+            "scale":[
+               3,
+               3
+            ]
          },
          "components":[
+            {
+               "type":"PlayerComponent",
+               "speed": 50
+            },
             {
                "type":"SpriteAnimationComponent",
                "textureName":"character.png",
@@ -20,7 +27,104 @@
                "numFramesY":8
             },
             {
-               "type":"PhysicsComponent"
+               "type":"RBPhysicsComponent",
+               "data.isDynamic":true,
+               "data.density":1,
+               "data.lockAngle":true,
+               "data.size":[
+                  72,
+                  96
+               ]
+            }
+         ]
+      },
+      {
+         "type":"Actor",
+         "tag":"Ground",
+         "transform":{
+            "position":[
+               400,
+               590
+            ],
+            "rotation":0,
+            "scale":[
+               1,
+               1
+            ]
+         },
+         "components":[
+            {
+               "type":"SpriteComponent",
+               "textureName":"ground.png"
+            },
+            {
+               "type":"RBPhysicsComponent",
+               "data.isDynamic":false,
+               "data.density":1,
+               "data.size":[
+                  800,
+                  20
+               ]
+            }
+         ]
+      },
+      {
+         "type":"Actor",
+         "tag":"wall",
+         "transform":{
+            "position":[
+               10,
+               300
+            ],
+            "rotation":90,
+            "scale":[
+               1,
+               1
+            ]
+         },
+         "components":[
+            {
+               "type":"SpriteComponent",
+               "textureName":"ground.png"
+            },
+            {
+               "type":"RBPhysicsComponent",
+               "data.isDynamic":false,
+               "data.density":1,
+               "data.size":[
+                  800,
+                  20
+               ]
+            }
+         ]
+      },
+      {
+         "type":"Actor",
+         "tag":"wall",
+         "transform":{
+            "position":[
+               790,
+               300
+            ],
+            "rotation":90,
+            "scale":[
+               1,
+               1
+            ]
+         },
+         "components":[
+            {
+               "type":"SpriteComponent",
+               "textureName":"ground.png"
+            },
+            {
+               "type":"RBPhysicsComponent",
+               "data.isDynamic":false,
+               "data.density":1,
+               "data.size":[
+                  800,
+                  20
+               ]
             }
          ]
       }
