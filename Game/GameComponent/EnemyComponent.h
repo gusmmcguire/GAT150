@@ -1,7 +1,7 @@
 #pragma once
 #include "Component/Component.h"
 
-class PlayerComponent : public gme::Component {
+class EnemyComponent : public gme::Component {
 public:
 	virtual void Update() override;
 
@@ -10,5 +10,4 @@ public:
 
 public:
 	float speed{ 0 };
-	float jumpSpeed{ 0 };
 };

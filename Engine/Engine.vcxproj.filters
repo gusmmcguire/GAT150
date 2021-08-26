@@ -225,8 +225,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Build\Resources\scene.txt">
+    <None Include="..\Build\Resources\scene.json">
       <Filter>Resources</Filter>
-    </Text>
+    </None>
   </ItemGroup>
 </Project>

@@ -15,6 +15,8 @@ namespace gme {
 		int fps{ 0 };
 		int numFramesX{ 0 };
 		int numFramesY{ 0 };
+		int startFrame{ 0 };
+		int endFrame{ 0 };
 		float frameTimer{ 0 };
 		float frameTime{ 0 };
 		SDL_Rect rect;

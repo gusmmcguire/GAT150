@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "GameComponent/PlayerComponent.h"
+#include "GameComponent/EnemyComponent.h"
 
 void Game::Initialize() {
 	//create engine
@@ -9,6 +10,7 @@ void Game::Initialize() {
 
 	//register classes
 	REGISTER_CLASS(PlayerComponent);
+	REGISTER_CLASS(EnemyComponent);
 
 	//create scene
 	scene = std::make_unique<gme::Scene>();
@@ -19,7 +21,7 @@ void Game::Initialize() {
 	gme::SetFilePath("../Resources");
 
 	rapidjson::Document document;
- 	bool success = gme::json::Load("scene.txt", document);
+ 	bool success = gme::json::Load("scene.json", document);
 	assert(success);
 	scene->Read(document);
 	

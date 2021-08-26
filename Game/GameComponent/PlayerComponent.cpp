@@ -12,6 +12,9 @@ void PlayerComponent::Update() {
 		force.x += speed;
 	}
 
+	/*if (IsButtonPressed(SDL_SCANCODE_SPACE, owner->scene->engine)) {
+		force.y += jumpSpeed;
+	}*/
 	PhysicsComponent* physicsComponent = owner->GetComponent<PhysicsComponent>();
 	assert(physicsComponent);
 
@@ -24,6 +27,7 @@ bool PlayerComponent::Write(const rapidjson::Value& value) const {
 
 bool PlayerComponent::Read(const rapidjson::Value& value) {
 	JSON_READ(value, speed);
+	JSON_READ(value, jumpSpeed);
 	return true;
 }
 
