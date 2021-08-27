@@ -18,14 +18,31 @@ namespace gme {
 		std::for_each(children.begin(), children.end(), [renderer](auto& child) {child->Draw(renderer); });
 	}
 
+	void Actor::BeginContact(Actor* other){
+		Event event;
+
+		event.name = "collision_enter";
+		event.data = other;
+		event.receiver = this;
+
+		scene->engine->Get<EventSystem>()->Notify(event);
+	}
+
+	void Actor::EndContact(Actor* other){
+		Event event;
+
+		event.name = "collision_exit";
+		event.data = other;
+		event.receiver = this;
+
+		scene->engine->Get<EventSystem>()->Notify(event);
+	}
+
 	void Actor::AddChild(std::unique_ptr<Actor> actor) {
 		actor->parent = this;
 		children.push_back(std::move(actor));
 	}
 
-	float Actor::GetRadius() {
-		return 0;
-	}
 	void Actor::AddComponent(std::unique_ptr<Component> component){
 		component->owner = this;
 
@@ -36,6 +53,7 @@ namespace gme {
 
 		return false;
 	}
+
 	bool Actor::Read(const rapidjson::Value& value){
 		JSON_READ(value, tag);
 		JSON_READ(value, name);
@@ -50,6 +68,7 @@ namespace gme {
 				if (component) {
 					component->owner = this;
 					component->Read(componentValue);
+					component->Create();
 					AddComponent(std::move(component));
 				}
 			}

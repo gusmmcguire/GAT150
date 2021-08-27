@@ -13,20 +13,6 @@ namespace gme {
 
 		//update actors
 		std::for_each(actors.begin(), actors.end(), [dt](auto& actor) {actor->Update(dt); });
-
-		//check collision
-		for (size_t i = 0; i < actors.size(); i++) {
-			for (size_t j = i + 1; j < actors.size(); j++) {
-				if (actors[i]->destroy || actors[j]->destroy) continue;
-				Vector2 dir = actors[i]->transform.position - actors[j]->transform.position;
-				float distance = dir.Length();
-				if (distance < actors[i]->GetRadius() + actors[j]->GetRadius()) {
-					actors[i]->OnCollision(actors[j].get());
-					actors[j]->OnCollision(actors[i].get());
-				}
-			}
-		}
-
 		
 		//destroy actors
 		auto iter = actors.begin();

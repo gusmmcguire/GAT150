@@ -28,7 +28,28 @@
           "numFramesX": 18,
           "numFramesY": 11,
           "startFrame": 90,
-          "endFrame": 95
+          "endFrame": 95,
+          "sequences": [
+            {
+              "name": "idle",
+              "sequence.fps": 2,
+              "sequence.startFrame": 0,
+              "sequence.endFrame": 1
+            },
+            {
+              "name": "walk_right",
+              "sequence.fps": 7,
+              "sequence.startFrame": 90,
+              "sequence.endFrame": 95
+            },
+            {
+              "name": "walk_left",
+              "sequence.fps": 7,
+              "sequence.startFrame": 162,
+              "sequence.endFrame": 167
+            }
+          ],
+          "defaultSequence": "idle"
         },
         {
           "type": "RBPhysicsComponent",
@@ -36,7 +57,7 @@
           "data.density": 1,
           "data.gravityScale": 1,
           "data.lockAngle": true,
-          "data.restitution": 0,
+          "data.restitution": 0.1,
           "data.friction": 0.75,
           "data.size": [
             32,
@@ -147,7 +168,8 @@
     },
     {
       "type": "Actor",
-      "tag": "wallLeft",
+      "name": "wall_left",
+      "tag": "wall",
       "transform": {
         "position": [
           10,
@@ -177,7 +199,8 @@
     },
     {
       "type": "Actor",
-      "tag": "wallRight",
+      "name": "wall_left",
+      "tag": "wall",
       "transform": {
         "position": [
           790,
@@ -207,7 +230,8 @@
     },
     {
       "type": "Actor",
-      "tag": "wallTop",
+      "name": "ceiling",
+      "tag": "wall",
       "transform": {
         "position": [
           400,
