@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "GameComponent/PlayerComponent.h"
 #include "GameComponent/EnemyComponent.h"
+#include "GameComponent/PickupComponent.h"
 
 void Game::Initialize() {
 	//create engine
@@ -11,6 +12,7 @@ void Game::Initialize() {
 	//register classes
 	REGISTER_CLASS(PlayerComponent);
 	REGISTER_CLASS(EnemyComponent);
+	REGISTER_CLASS(PickupComponent);
 
 	//create scene
 	scene = std::make_unique<gme::Scene>();
