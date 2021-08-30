@@ -4,6 +4,8 @@
 
 class PickupComponent : public gme::Component {
 public:
+	virtual ~PickupComponent();
+
 	void Create() override;
 	virtual void Update() override;
 

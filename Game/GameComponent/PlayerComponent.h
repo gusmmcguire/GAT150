@@ -5,6 +5,8 @@
 
 class PlayerComponent : public gme::Component {
 public:
+	virtual ~PlayerComponent();
+
 	void Create() override;
 	virtual void Update() override;
 

@@ -3,6 +3,8 @@
 
 class EnemyComponent : public gme::Component {
 public:
+	virtual ~EnemyComponent();
+
 	virtual void Update() override;
 
 	virtual bool Write(const rapidjson::Value& value) const override;

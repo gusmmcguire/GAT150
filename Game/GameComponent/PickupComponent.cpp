@@ -3,6 +3,11 @@
 
 using namespace gme;
 
+PickupComponent::~PickupComponent()
+{
+	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collision_enter", owner);
+	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collision_exit", owner);
+}
 
 void PickupComponent::Create() {
 	owner->scene->engine->Get<EventSystem>()->Subscribe("collision_enter", std::bind(&PickupComponent::OnCollisionEnter, this, std::placeholders::_1), owner);
@@ -12,6 +17,7 @@ void PickupComponent::Create() {
 }
 
 void PickupComponent::Update(){
+	
 
 }
 

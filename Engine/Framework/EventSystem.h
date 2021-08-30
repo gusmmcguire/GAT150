@@ -19,6 +19,8 @@ namespace gme {
 	public:
 		using function_t = std::function<void(const Event&)>;
 
+		void Unsubscribe(const std::string& name, Object* receiver);
+
 		virtual void Startup() override;
 
 		virtual void Shutdown() override;
@@ -31,7 +33,7 @@ namespace gme {
 	private:
 		struct Observer {
 			function_t function;
-			Object* reciever;
+			Object* receiver;
 		};
 
 	private:

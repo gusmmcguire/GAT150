@@ -2,6 +2,11 @@
 #include "Engine.h"
 
 using namespace gme;
+EnemyComponent::~EnemyComponent()
+{
+	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collision_enter", owner);
+	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collision_exit", owner);
+}
 
 void EnemyComponent::Update() {
 	Actor* player = owner->scene->FindActor("Player");

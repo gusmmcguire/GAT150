@@ -25,7 +25,7 @@ namespace gme {
 		event.data = other;
 		event.receiver = this;
 
- 		if(!destroy) scene->engine->Get<EventSystem>()->Notify(event);
+ 		scene->engine->Get<EventSystem>()->Notify(event);
 	}
 
 	void Actor::EndContact(Actor* other){
@@ -35,7 +35,7 @@ namespace gme {
 		event.data = other;
 		event.receiver = this;
 
-		if (!destroy) scene->engine->Get<EventSystem>()->Notify(event);
+		scene->engine->Get<EventSystem>()->Notify(event);
 	}
 
 	void Actor::AddChild(std::unique_ptr<Actor> actor) {
