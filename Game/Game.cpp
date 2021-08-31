@@ -26,7 +26,13 @@ void Game::Initialize() {
  	bool success = gme::json::Load("scene.json", document);
 	assert(success);
 	scene->Read(document);
-	
+
+	for (int i = 0; i < 20; i++) {
+
+		auto actor = gme::ObjectFactory::Instance().Create<gme::Actor>("Coin");
+		actor->transform.position = gme::Vector2{ gme::RandomRange(100,700), 200.0f };
+		scene->AddActor(std::move(actor));
+	}
 }
 
 void Game::Shutdown(){

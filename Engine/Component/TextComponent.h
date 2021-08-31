@@ -9,6 +9,8 @@ namespace gme {
 
 	class TextComponent : public GraphicsComponent {
 	public:
+		std::unique_ptr<Object> Clone() const { return std::make_unique<TextComponent>(*this); }
+
 		void Update() override;
 		void Draw(Renderer* renderer) override;
 

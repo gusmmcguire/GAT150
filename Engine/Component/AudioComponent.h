@@ -5,6 +5,8 @@
 namespace gme {
 	class AudioComponent : public Component {
 	public:
+		std::unique_ptr<Object> Clone() const { return std::make_unique<AudioComponent>(*this); }
+
 		virtual void Update() override;
 		
 		void Play();

@@ -3,6 +3,7 @@
 
 class EnemyComponent : public gme::Component {
 public:
+	std::unique_ptr<Object> Clone() const { return std::make_unique<EnemyComponent>(*this); }
 	virtual ~EnemyComponent();
 
 	virtual void Update() override;

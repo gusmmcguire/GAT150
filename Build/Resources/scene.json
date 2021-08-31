@@ -57,7 +57,7 @@
           "data.density": 1,
           "data.gravityScale": 1,
           "data.lockAngle": true,
-          "data.restitution": 0.1,
+          "data.restitution": 0,
           "data.friction": 0.75,
           "data.size": [
             32,
@@ -115,6 +115,8 @@
     },
     {
       "type": "Actor",
+      "prototype": true,
+      "name": "Coin",
       "tag": "coin",
       "transform": {
         "position": [
@@ -139,16 +141,16 @@
         },
         {
           "type": "RBPhysicsComponent",
-          "data.isDynamic": false,
-          "data.isSensor": true,
+          "data.isDynamic": true,
+          "data.isSensor": false,
           "data.density": 1,
-          "data.gravityScale": 0,
+          "data.gravityScale": 1,
           "data.lockAngle": true,
           "data.restitution": 0.1,
           "data.friction": 0.75,
           "data.size": [
-            16,
-            16
+            32,
+            32
           ]
         },
         {
@@ -202,6 +204,7 @@
           "type": "RBPhysicsComponent",
           "data.isDynamic": false,
           "data.density": 1,
+          "data.friction":  0,
           "data.size": [
             800,
             20
@@ -233,6 +236,7 @@
           "type": "RBPhysicsComponent",
           "data.isDynamic": false,
           "data.density": 1,
+          "data.friction": 0,
           "data.size": [
             800,
             20
@@ -264,6 +268,7 @@
           "type": "RBPhysicsComponent",
           "data.isDynamic": false,
           "data.density": 1,
+          "data.friction": 0,
           "data.size": [
             800,
             20
@@ -295,6 +300,7 @@
           "type": "RBPhysicsComponent",
           "data.isDynamic": false,
           "data.density": 1,
+          "data.friction": 0,
           "data.size": [
             800,
             20

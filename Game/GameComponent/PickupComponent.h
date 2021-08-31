@@ -4,6 +4,7 @@
 
 class PickupComponent : public gme::Component {
 public:
+	std::unique_ptr<Object> Clone() const { return std::make_unique<PickupComponent>(*this); }
 	virtual ~PickupComponent();
 
 	void Create() override;

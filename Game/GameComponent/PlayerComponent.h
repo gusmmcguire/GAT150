@@ -5,6 +5,7 @@
 
 class PlayerComponent : public gme::Component {
 public:
+	std::unique_ptr<Object> Clone() const { return std::make_unique<PlayerComponent>(*this); }
 	virtual ~PlayerComponent();
 
 	void Create() override;

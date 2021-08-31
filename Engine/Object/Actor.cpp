@@ -7,6 +7,18 @@
 #include <algorithm>
 
 namespace gme {
+	Actor::Actor(const Actor& other){
+		name = other.name;
+		tag = other.tag;
+		transform = other.transform;
+		scene = other.scene;
+		for (auto& component : other.components) {
+			auto clone = std::unique_ptr<Component>(dynamic_cast<Component*>(component->Clone().release()));
+			clone->owner = this;
+			clone->Create();
+			AddComponent(std::move(clone));
+		}
+	}
 	void Actor::Update(float dt) {
 		std::for_each(components.begin(), components.end(), [](auto& component) { component->Update(); });
 		transform.Update();
