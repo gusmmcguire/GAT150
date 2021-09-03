@@ -1,0 +1,207 @@
+{
+  "actors": [
+    {
+      "type": "Actor",
+      "name": "Player",
+      "tag": "Player",
+      "prototype": true,
+      "transform": {
+        "position": [
+          100,
+          500
+        ],
+        "rotation": 0,
+        "scale": [
+          2.5,
+          2.5
+        ]
+      },
+      "components": [
+        {
+          "type": "PlayerComponent",
+          "speed": 7
+        },
+        {
+          "type": "SpriteAnimationComponent",
+          "textureName": "character.png",
+          "fps": 10,
+          "numFramesX": 5,
+          "numFramesY": 8,
+          "sequences": [
+            {
+              "name": "idle",
+              "sequence.fps": 1,
+              "sequence.startFrame": 0,
+              "sequence.endFrame": 0
+            },
+            {
+              "name": "walk_down",
+              "sequence.fps": 7,
+              "sequence.startFrame": 0,
+              "sequence.endFrame": 3
+            },
+            {
+              "name": "walk_left",
+              "sequence.fps": 7,
+              "sequence.startFrame": 5,
+              "sequence.endFrame": 8
+            },
+            {
+              "name": "walk_right",
+              "sequence.fps": 7,
+              "sequence.startFrame": 10,
+              "sequence.endFrame": 13
+            },
+            {
+              "name": "attack_down",
+              "sequence.fps": 7,
+              "sequence.startFrame": 15,
+              "sequence.endFrame": 19
+            },
+            {
+              "name": "attack_right",
+              "sequence.fps": 7,
+              "sequence.startFrame": 20,
+              "sequence.endFrame": 24
+            },
+            {
+              "name": "attack_left",
+              "sequence.fps": 7,
+              "sequence.startFrame": 25,
+              "sequence.endFrame": 29
+            },
+            {
+              "name": "attack_up",
+              "sequence.fps": 7,
+              "sequence.startFrame": 30,
+              "sequence.endFrame": 34
+            },
+            {
+              "name": "walk_up",
+              "sequence.fps": 7,
+              "sequence.startFrame": 35,
+              "sequence.endFrame": 38
+            }
+          ],
+          "defaultSequence": "idle"
+        },
+        {
+          "type": "RBPhysicsComponent",
+          "data.isDynamic": true,
+          "data.density": 1,
+          "data.gravityScale": 0,
+          "data.lockAngle": true,
+          "data.restitution": 0,
+          "data.friction": 0.75,
+          "data.size": [
+            15,
+            18
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Actor",
+      "name": "Enemy",
+      "tag": "Enemy",
+      "prototype": true,
+      "transform": {
+        "position": [
+          500,
+          200
+        ],
+        "rotation": 0,
+        "scale": [
+          2,
+          2
+        ]
+      },
+      "components": [
+        {
+          "type": "EnemyComponent",
+          "speed": 10
+        },
+        {
+          "type": "SpriteAnimationComponent",
+          "textureName": "bat.png",
+          "fps": 10,
+          "numFramesX": 4,
+          "numFramesY": 1
+        },
+        {
+          "type": "RBPhysicsComponent",
+          "data.isDynamic": true,
+          "data.isSensor": true,
+          "data.density": 10,
+          "data.gravityScale": 0,
+          "data.lockAngle": true,
+          "data.restitution": 0,
+          "data.friction": 0.75,
+          "data.size": [
+            16,
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Actor",
+      "name": "tile01",
+      "tag": "wall",
+      "prototype": true,
+      "transform": {
+        "scale": [
+          1,
+          1
+        ]
+      },
+      "components": [
+        {
+          "type": "SpriteComponent",
+          "textureName": "tileset2.png",
+          "rect": [
+            448,
+            192,
+            32,
+            32
+          ]
+        },
+        {
+          "type": "RBPhysicsComponent",
+          "data.isDynamic": false,
+          "data.density": 1,
+          "data.friction": 1,
+          "data.restitution": 0,
+          "data.size": [
+            32,
+            32
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Actor",
+      "name": "tile02",
+      "tag": "floor",
+      "prototype": true,
+      "transform": {
+        "scale": [
+          1,
+          1
+        ]
+      },
+      "components": [
+        {
+          "type": "SpriteComponent",
+          "textureName": "floor_tiles.png",
+          "rect": [
+            128,
+            0,
+            32,
+            32
+          ]
+        }
+      ]
+    }
+  ]
+}

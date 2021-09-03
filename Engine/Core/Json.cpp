@@ -16,6 +16,7 @@ namespace gme {
 			}
 			return success;
 		}
+		
 		bool Get(const rapidjson::Value& value, const std::string& name, int& data)
 		{
 			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsInt() == false) {
@@ -24,6 +25,7 @@ namespace gme {
 			data = value[name.c_str()].GetInt();
 			return true;
 		}
+		
 		bool Get(const rapidjson::Value& value, const std::string& name, float& data)
 		{
 			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsNumber() == false) {
@@ -32,6 +34,7 @@ namespace gme {
 			data = value[name.c_str()].GetFloat();
 			return true;
 		}
+		
 		bool Get(const rapidjson::Value& value, const std::string& name, bool& data)
 		{
 			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsBool() == false) {
@@ -40,6 +43,7 @@ namespace gme {
 			data = value[name.c_str()].GetBool();
 			return true;
 		}
+		
 		bool Get(const rapidjson::Value& value, const std::string& name, std::string& data)
 		{
 			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsString() == false) {
@@ -48,6 +52,7 @@ namespace gme {
 			data = value[name.c_str()].GetString();
 			return true;
 		}
+		
 		bool Get(const rapidjson::Value& value, const std::string& name, Vector2& data)
 		{
 			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsArray() == false || value[name.c_str()].Size() != 2)
@@ -67,6 +72,7 @@ namespace gme {
 			return true;
 
 		}
+		
 		bool Get(const rapidjson::Value& value, const std::string& name, Color& data)
 		{
 			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsArray() == false || value[name.c_str()].Size() != 3)
@@ -84,6 +90,53 @@ namespace gme {
 			}
 
 			return true;
+		}
+
+		bool Get(const rapidjson::Value& value, const std::string& name, SDL_Rect& data)
+		{
+			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsArray() == false || value[name.c_str()].Size() != 4)
+			{
+				return false;
+			}
+
+			auto& array = value[name.c_str()];
+			data.x = array[0].GetInt();
+			data.y = array[1].GetInt();
+			data.w = array[2].GetInt();
+			data.h = array[3].GetInt();
+
+
+			return true;
+		}
+
+		bool Get(const rapidjson::Value& value, const std::string& name, std::vector<std::string>& data)
+		{
+			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsArray() == false)
+			{
+				return false;
+			}
+
+			auto& array = value[name.c_str()];
+			for (auto& element : array.GetArray())
+			{
+				data.push_back(element.GetString());
+			}
+
+			return true;
+		}
+
+		bool Get(const rapidjson::Value& value, const std::string& name, std::vector<int>& data)
+		{
+			if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsArray() == false)
+			{
+				return false;
+			}
+
+			auto& array = value[name.c_str()];
+			for (auto& element : array.GetArray())
+			{
+				data.push_back(element.GetInt());
+			}
 		}
 	}
 }

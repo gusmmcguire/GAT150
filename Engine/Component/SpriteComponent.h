@@ -14,6 +14,7 @@ namespace gme {
 		virtual bool Read(const rapidjson::Value& value) override;
 	public:
 		std::shared_ptr<class Texture> texture;
+		SDL_Rect rect;
 
 	};
 }

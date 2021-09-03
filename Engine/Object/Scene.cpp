@@ -41,7 +41,9 @@ namespace gme {
 	}
 
 	void Scene::RemoveAllActors(){
-		actors.clear();
+		for (auto& actor : actors) {
+			actor->destroy = true;
+		}
 	}
 
 	Actor* Scene::FindActor(const std::string& name)

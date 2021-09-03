@@ -11,16 +11,18 @@ EnemyComponent::~EnemyComponent()
 void EnemyComponent::Update() {
 	Actor* player = owner->scene->FindActor("Player");
 	if (player) {
-	
 		Vector2 direction = player->transform.position - owner->transform.position;
  		Vector2 force = direction.Normalized() * speed;
 
 
 		PhysicsComponent* physicsComponent = owner->GetComponent<PhysicsComponent>();
-		assert(physicsComponent);
-
+ 		assert(physicsComponent);
+		owner->transform.position.x = Wrap(owner->transform.position.x, 0.0f, 800.0f);
+		owner->transform.position.y = Wrap(owner->transform.position.y, 0.0f, 600.0f);
 		physicsComponent->ApplyForce(force);
 	}
+
+
 }
 
 bool EnemyComponent::Write(const rapidjson::Value& value) const {

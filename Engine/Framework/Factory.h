@@ -22,7 +22,7 @@ namespace gme {
 		Prototype(std::unique_ptr<TBase> instance) : instance{ std::move(instance) } {}
 
 		std::unique_ptr<TBase> Create() const override {
-			return instance->Clone();
+ 			return instance->Clone();
 		}
 
 	private:

@@ -1,12 +1,12 @@
 #include "PickupComponent.h"
 #include "Engine.h"
+#include "Math/Random.h"
 
 using namespace gme;
 
 PickupComponent::~PickupComponent()
 {
 	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collision_enter", owner);
-	owner->scene->engine->Get<EventSystem>()->Unsubscribe("collision_exit", owner);
 }
 
 void PickupComponent::Create() {
@@ -22,8 +22,14 @@ void PickupComponent::OnCollisionEnter(const gme::Event& event) {
 	Actor* actor = reinterpret_cast<Actor*>(p);
 
 	if (istring_compare(actor->name, "Player")) {
+
 		owner->scene->engine->Get<AudioSystem>()->PlayAudio("coin");
 		owner->destroy = true;
+
+		Event event;
+		event.name = "add_score";
+		event.data = RandomRangeInt(1, 5);
+		owner->scene->engine->Get<EventSystem>()->Notify(event);
 	}
 }
 

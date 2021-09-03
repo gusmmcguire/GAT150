@@ -1,8 +1,10 @@
 #include "RBPhysicsComponent.h"
 #include "Engine.h"
 namespace gme {
-	RBPhysicsComponent::~RBPhysicsComponent()
-	{
+	RBPhysicsComponent::RBPhysicsComponent(const RBPhysicsComponent& other){
+		data = other.data;
+	}
+	RBPhysicsComponent::~RBPhysicsComponent(){
 		owner->scene->engine->Get<PhysicsSystem>()->DestroyBody(body);
 	}
 
@@ -10,7 +12,7 @@ namespace gme {
 		if (!body) {
 			body = owner->scene->engine->Get<PhysicsSystem>()->CreateBody(owner->transform.position, owner->transform.rotation, data, owner);
 			body->SetGravityScale(data.gravityScale);
-			body->SetLinearDamping(.25);
+			body->SetLinearDamping(.1f);
 		}
 
 		owner->transform.position = PhysicsSystem::WorldToScreen(body->GetPosition());
@@ -20,6 +22,8 @@ namespace gme {
 	
 	void RBPhysicsComponent::ApplyForce(const Vector2& force) {
 		if (body) {
+			if (force.x == 0) body->SetLinearVelocity({ 0,force.y });
+			if (force.y == 0) body->SetLinearVelocity({ force.x,0 });
 			body->ApplyForceToCenter(force, true);
 		}
 	}

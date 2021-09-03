@@ -1,0 +1,73 @@
+{
+  "actors": [
+    {
+      "type": "Actor",
+      "name": "Title",
+      "transform": {
+        "position": [
+          400,
+          300
+        ]
+      },
+      "components": [
+        {
+          "type": "TextComponent",
+          "fontName": "Fonts/KarmaFuture.ttf",
+          "fontSize": 30,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "text": "Game Over"
+        }
+      ]
+    },
+    {
+      "type": "Actor",
+      "name": "Instrtuction",
+      "transform": {
+        "position": [
+          400,
+          350
+        ]
+      },
+      "components": [
+        {
+          "type": "TextComponent",
+          "fontName": "Fonts/KarmaFuture.ttf",
+          "fontSize": 30,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "text": "Press Space to Restart"
+        }
+      ]
+    },
+    {
+      "type": "Actor",
+      "name": "Timer",
+      "transform": {
+        "position": [
+          150,
+          50
+        ]
+      },
+      "components": [
+        {
+          "type": "TextComponent",
+          "fontName": "Fonts/KarmaFuture.ttf",
+          "fontSize": 30,
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "text": "Time Survived: 00"
+        }
+      ]
+    }
+  ]
+}

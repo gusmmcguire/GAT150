@@ -122,6 +122,9 @@
     <ClCompile Include="Physics\ContactListener.cpp">
       <Filter>Source\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="Object\Tilemap.cpp">
+      <Filter>Source\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\EventSystem.h">
@@ -241,9 +244,30 @@
     <ClInclude Include="Physics\ContactListener.h">
       <Filter>Source\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Object\Tilemap.h">
+      <Filter>Source\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Build\Resources\scene.json">
+    <None Include="..\Build\Resources\level1.json">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\Build\Resources\map1.json">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\Build\Resources\title.json">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\Build\Resources\gameover.json">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\Build\Resources\level2.json">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\Build\Resources\map2.json">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\Build\Resources\timer.json">
       <Filter>Resources</Filter>
     </None>
   </ItemGroup>
